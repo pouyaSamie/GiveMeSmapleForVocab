@@ -1,0 +1,1 @@
+sourceList = ["www.nytimes.com"]
