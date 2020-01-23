@@ -29,7 +29,9 @@ class CommandLine:
 
         if not status:
             word = input("Enter your word: ")
-            searchForWord = SearchForWord(word)
+            result = SearchForWord(word).paragraphs
+            for item in result:
+                print(item)
 
 
 if __name__ == '__main__':
