@@ -7,7 +7,7 @@
         "name": "Python: Current File",
         "type": "python",
         "request": "launch",
-        "program": "D:\\workspace\\pyProjects\\parsePages\\src\\Scrape.py",
+        "program": "D:\\workspace\\pyProjects\\parsePages\\scrape.py",
         "console": "integratedTerminal",
         "args": ["-o", "result.txt"]
     }]
