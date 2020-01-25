@@ -1,8 +1,12 @@
 import argparse
 from scraping.SearchForWord import SearchForWord
+from scraping.SaveResultToFile import SaveResultToFile
 
 
 class CommandLine:
+    word = ""
+    result = []
+
     def __init__(self):
         parser = argparse.ArgumentParser(
             description="Get Sample sentences of a word from reliable sources like news page. this library can help students who are studing IELTS, PTE,TOFEL and so on. ")
@@ -14,24 +18,30 @@ class CommandLine:
             "-o", "--out", help="save result in an output file", required=False, default="")
 
         argument = parser.parse_args()
-        status = False
+        readFormFile = False
 
         if argument.file:
             print("Mode : Read From File")
-            status = True
-        if argument.out:
-            print("Mode : Save File to Desierd Location")
-            status = True
+            readFormFile = True
+
         if argument.Help:
             print(
                 "You have used '-p' or '--Help' with argument: {0}".format(argument.Help))
-            status = True
 
-        if not status:
+            return
+
+        if not readFormFile:
             word = input("Enter your word: ")
             result = SearchForWord(word).paragraphs
             for item in result:
                 print(item)
+        else:
+            # Read CSV File
+            pass
+
+        if argument.out:
+            SaveResultToFile(argument.out, result)
+            print(f"Result has been saved in {argument.out}")
 
 
 if __name__ == '__main__':

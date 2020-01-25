@@ -8,6 +8,7 @@
         "type": "python",
         "request": "launch",
         "program": "D:\\workspace\\pyProjects\\parsePages\\src\\Scrape.py",
-        "console": "integratedTerminal"
+        "console": "integratedTerminal",
+        "args": ["-o", "result.txt"]
     }]
 }
