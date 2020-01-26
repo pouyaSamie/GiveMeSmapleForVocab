@@ -7,8 +7,8 @@
         "name": "Python: Current File",
         "type": "python",
         "request": "launch",
-        "program": "D:\\workspace\\pyProjects\\parsePages\\scrape.py",
+        "program": "D:\\workspace\\pyProjects\\GiveMeVocab\\scrape.py",
         "console": "integratedTerminal",
-        "args": ["-o", "result.txt"]
+        "args": ["-o", "result.txt", "-tts"]
     }]
 }

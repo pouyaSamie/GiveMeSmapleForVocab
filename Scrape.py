@@ -1,6 +1,7 @@
 import argparse
 from src.scraping.SearchForWord import SearchForWord
 from src.scraping.SaveResultToFile import SaveResultToFile
+from src.scraping.ReadItLoad import ReadItLoad
 
 
 class CommandLine:
@@ -11,12 +12,14 @@ class CommandLine:
         parser = argparse.ArgumentParser(
             description="Get Sample sentences of a word from reliable sources like news page. this library can help students who are studing IELTS, PTE,TOFEL and so on. ")
         parser.add_argument(
-            "-H", "--Help", help="Example: Help argument", required=False, default="")
+            "-H", "--Help", help="Show Help Menu", required=False, default="")
         parser.add_argument(
             "-f", "--file", help="Read Word from single line csv", required=False, default="")
         parser.add_argument(
             "-o", "--out", help="save result in an output file", required=False, default="")
 
+        parser.add_argument(
+            "-tts", "--tts", help="Read out load The Result (this feature need internet access)", required=False, default="False", action='store_true')
         argument = parser.parse_args()
         readFormFile = False
 
@@ -26,7 +29,7 @@ class CommandLine:
 
         if argument.Help:
             print(
-                "You have used '-p' or '--Help' with argument: {0}".format(argument.Help))
+                "You have used '-h' or '--Help' with argument: {0}".format(argument.Help))
 
             return
 
@@ -42,6 +45,9 @@ class CommandLine:
         if argument.out:
             SaveResultToFile(argument.out, result)
             print(f"Result has been saved in {argument.out}")
+
+        if argument.tts:
+            ReadItLoad(argument.out)
 
 
 if __name__ == '__main__':

@@ -4,12 +4,12 @@ import re
 
 class GoogleSearch:
     source = ""
-    maxSample = 1
+    maxSample = 10
     links = []
 
-    def __init__(self, source, maxSampe=1):
+    def __init__(self, source, maxSample=10):
         self.source = source
-        self.maxSample = maxSampe
+        self.maxSample = maxSample
 
     def SearchOnGoogle(self, word):
         header = {
@@ -19,4 +19,4 @@ class GoogleSearch:
 
         nyregex = rf"<a\s+(?:[^>]*?\s+)?href=([\"'])(https://{self.source}.*?)\1"
         match = re.findall(nyregex, googleResult.text)
-        return [i[1] for i in match]
+        return [i[1] for i in match][:self.maxSample]
