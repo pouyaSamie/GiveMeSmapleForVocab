@@ -7,6 +7,12 @@ Get vocab from file is under development and will be add soon.
 
 ## Usage 
 
+Install requirements from requirements.txt 
+
+```
+pip3 install -r requirements.txt
+```
+
 just run the script it will ask you for the vocab that you want get some real life sample.
 
 you can specify the -o flag to save the result to file.
