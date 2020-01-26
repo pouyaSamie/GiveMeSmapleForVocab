@@ -5,13 +5,13 @@ this library also has the Text to speech feature than can help students to learn
 
 Get vocab from file is under development and will be add soon.
 
-##Usage 
+## Usage 
 
 just run the script it will ask you for the vocab that you want get some real life sample.
 
 you can specify the -o flag to save the result to file.
 
 
-##example 
+## example 
 start script to same result to result.txt and read them load:
     scrape.py -o result.txt -tts
