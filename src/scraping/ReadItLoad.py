@@ -9,12 +9,12 @@ class ReadItLoad():
 
     def __init__(self, filePath):
         self.filePath = filePath
-        print("Prepare the text to speach")
+        print("Prepare the text to speech")
         print("this can take a while please be patient.....")
 
-        self.TextToSpeach()
+        self.TextToSpeech()
 
-    def TextToSpeach(self):
+    def TextToSpeech(self):
         text_to_read = ""
         with open(self.filePath, 'r', encoding="utf-8") as file:
             text_to_read = file.read().replace('\n', '')
