@@ -14,4 +14,4 @@ you can specify the -o flag to save the result to file.
 
 ## example 
 start script to same result to result.txt and read them load:
-    scrape.py -o result.txt -tts
+    `scrape.py -o result.txt -tts`
