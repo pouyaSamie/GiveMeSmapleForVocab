@@ -16,10 +16,10 @@ you can specify the -o flag to save the result to file.
 start script to same result to result.txt and read them load:
 
 ```
-scrape.py -o result.txt -tts
+getSample.py -o result.txt -tts
 ```
 start script to same result to result.txt and read them load and save the audio File:
 
 ```
-scrape.py -o result.txt -tts -SaveAudio
+getSample.py -o result.txt -tts -SaveAudio
 ```
