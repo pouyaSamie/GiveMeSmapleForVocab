@@ -6,9 +6,10 @@ from .SourceScraper import SourceScraper
 class SearchForWord():
     paragraphs = []
 
-    def __init__(self, word):
+    def __init__(self, word, maxParagraph=10):
         # this should be for multiple sources
-        googleSearch = GoogleSearch(source=sourceList[0])
+        googleSearch = GoogleSearch(
+            source=sourceList[0], maxSample=maxParagraph)
         googleResult = googleSearch.SearchOnGoogle(word)
         if len(googleResult) > 0:
             for item in googleResult:

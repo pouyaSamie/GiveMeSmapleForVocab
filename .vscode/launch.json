@@ -9,6 +9,6 @@
         "request": "launch",
         "program": "D:\\workspace\\pyProjects\\GiveMeVocab\\scrape.py",
         "console": "integratedTerminal",
-        "args": ["-o", "result.txt", "-tts"]
+        "args": ["-o", "result.txt", "-tts", "-SaveAudio"]
     }]
 }

@@ -18,3 +18,8 @@ start script to same result to result.txt and read them load:
 ```
 scrape.py -o result.txt -tts
 ```
+start script to same result to result.txt and read them load and save the audio File:
+
+```
+scrape.py -o result.txt -tts -SaveAudio
+```

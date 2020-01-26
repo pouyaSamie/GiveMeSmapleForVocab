@@ -20,6 +20,9 @@ class CommandLine:
 
         parser.add_argument(
             "-tts", "--tts", help="Read out load The Result (this feature need internet access)", required=False, default="False", action='store_true')
+
+        parser.add_argument(
+            "-SaveAudio", "--SaveAudio", help="Save Audio File", required=False, default=False, action='store_true')
         argument = parser.parse_args()
         readFormFile = False
 
@@ -35,7 +38,7 @@ class CommandLine:
 
         if not readFormFile:
             word = input("Enter your word: ")
-            result = SearchForWord(word).paragraphs
+            result = SearchForWord(word, 1).paragraphs
             for item in result:
                 print(item)
         else:
@@ -47,7 +50,7 @@ class CommandLine:
             print(f"Result has been saved in {argument.out}")
 
         if argument.tts:
-            ReadItLoad(argument.out)
+            ReadItLoad(result, argument.SaveAudio)
 
 
 if __name__ == '__main__':
