@@ -22,11 +22,6 @@ class SearchEnginSpider:
         bingResult = requests.get(
             f'https://www.bing.com/search?q=site%3A{self.source}+%22{word}%22', headers=header)
 
-        with open("test.html", 'w', encoding="utf-8") as f:
-            f.write(bingResult.text)
-
-        f.close()
-
         soup = BeautifulSoup(bingResult.content, 'html.parser')
         olResult = soup.find("ol", {"id": "b_results"}).contents
 
