@@ -1,4 +1,4 @@
-from .SearchEngine import GoogleSearch
+from .SearchEnginSpider import SearchEnginSpider
 from .NewsSource import sourceList
 from .SourceScraper import SourceScraper
 
@@ -8,12 +8,13 @@ class SearchForWord():
 
     def __init__(self, word, maxParagraph=10):
         # this should be for multiple sources
-        googleSearch = GoogleSearch(
+        spider = SearchEnginSpider(
             source=sourceList[0], maxSample=maxParagraph)
-        googleResult = googleSearch.SearchOnGoogle(word)
-        if len(googleResult) > 0:
-            for item in googleResult:
+        searchResult = spider.SearchOnBing(word)
+        if len(searchResult) > 0:
+            for item in searchResult:
                 result = SourceScraper(item, word).Scrape()
                 print(result)
                 print("\r\n")
-                self.paragraphs.append(result)
+                if result != '':
+                    self.paragraphs.append(result)

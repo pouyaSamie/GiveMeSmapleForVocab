@@ -2,11 +2,14 @@ import argparse
 from src.scraping.SearchForWord import SearchForWord
 from src.scraping.SaveResultToFile import SaveResultToFile
 from src.scraping.ReadItLoad import ReadItLoad
+from src.scraping.ReadFromCsv import ReadFromCsv
 
 
 class CommandLine:
     word = ""
     result = []
+    wordList = []
+    maxParagNumber = 1
 
     def __init__(self):
         parser = argparse.ArgumentParser(
@@ -19,7 +22,7 @@ class CommandLine:
             "-o", "--out", help="save result in an output file", required=False, default="")
 
         parser.add_argument(
-            "-tts", "--tts", help="Read out load The Result (this feature need internet access)", required=False, default="False", action='store_true')
+            "-tts", "--tts", help="Read out load The Result (this feature need internet access)", required=False, default=False, action='store_true')
 
         parser.add_argument(
             "-SaveAudio", "--SaveAudio", help="Save Audio File", required=False, default=False, action='store_true')
@@ -38,19 +41,28 @@ class CommandLine:
 
         if not readFormFile:
             word = input("Enter your word: ")
-            result = SearchForWord(word, 1).paragraphs
-            for item in result:
+            self.result = SearchForWord(
+                self.word, maxParagraph=self.maxParagNumber).paragraphs
+
+            for item in self.result:
                 print(item)
         else:
             # Read CSV File
-            pass
+            self.wordList = ReadFromCsv(argument.file).readCsv()
+            for word in self.wordList:
+                paragraphs = SearchForWord(
+                    word, maxParagraph=self.maxParagNumber).paragraphs
+
+            self.result = paragraphs
 
         if argument.out:
-            SaveResultToFile(argument.out, result)
-            print(f"Result has been saved in {argument.out}")
-
+            if self.result:
+                SaveResultToFile(argument.out, self.result)
+                print(f"Result has been saved in {argument.out}")
+            else:
+                print("No Result has been found.")
         if argument.tts:
-            ReadItLoad(result, argument.SaveAudio)
+            ReadItLoad(self.result, argument.SaveAudio)
 
 
 if __name__ == '__main__':
