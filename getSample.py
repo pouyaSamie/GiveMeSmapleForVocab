@@ -25,6 +25,9 @@ class CommandLine:
             "-tts", "--tts", help="Read out load The Result (this feature need internet access)", required=False, default=False, action='store_true')
 
         parser.add_argument(
+            "-n", "--NumberOfParagraphs", type=int, help="Number of paragraphs that will return", required=False, default=1)
+
+        parser.add_argument(
             "-SaveAudio", "--SaveAudio", help="Save Audio File", required=False, default=False, action='store_true')
         argument = parser.parse_args()
         readFormFile = False
@@ -38,6 +41,8 @@ class CommandLine:
                 "You have used '-h' or '--Help' with argument: {0}".format(argument.Help))
 
             return
+        if argument.NumberOfParagraphs > 1:
+            self.maxParagNumber = argument.NumberOfParagraphs
 
         if not readFormFile:
             word = input("Enter your word: ")
