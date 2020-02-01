@@ -23,7 +23,10 @@ class SourceScraper():
         soup = BeautifulSoup(body, 'html.parser')
 
         texts = soup.find_all(text=re.compile(q),)
+        result = ""
         for paragraph in texts:
             if paragraph.find_parent('p'):
-                return paragraph.find_parent('p').get_text()
+                result = paragraph.find_parent('p').get_text()
+                if result != "":
+                    return result
         return ""
