@@ -1,11 +1,12 @@
-import requests
 import re
 from bs4 import BeautifulSoup
+from .UrlCaller import UrlCaller
 
 
 class SearchEnginSpider:
     source = ""
     links = []
+    urlTemplate = 'https://www.bing.com/search?q=site%3A{}+%22{}%22'
 
     def __init__(self, source):
         self.source = source
@@ -13,13 +14,10 @@ class SearchEnginSpider:
     # We Searching on bing because google changing the way
     # it response to results and can not parsing them easily
     # but bing is so much stable about it
-
     def SearchOnBing(self, word):
-        header = {
-            'User-Agent': 'Mozilla/4.0 (compatible; MSIE 6.1; Windows XP; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'}
 
-        bingResult = requests.get(
-            f'https://www.bing.com/search?q=site%3A{self.source}+%22{word}%22', headers=header)
+        bingResult = UrlCaller().GetRequest(
+            self.urlTemplate.format(self.source, word))
 
         soup = BeautifulSoup(bingResult.content, 'html.parser')
         olResult = soup.find("ol", {"id": "b_results"}).contents
@@ -31,4 +29,5 @@ class SearchEnginSpider:
                 if 'href' in link.attrs:
                     if link.attrs['href'].startswith(f'https://{self.source}'):
                         self.links.append(link.attrs['href'])
+
         return self.links

@@ -1,23 +1,24 @@
-import requests
 from bs4 import BeautifulSoup
 import re
+from .UrlCaller import UrlCaller
+import asyncio
+from aiohttp import ClientSession
 
 
 class SourceScraper():
     link = ""
     paragraph = ""
     word = ""
+    loop = None
 
     def __init__(self, link, word):
         self.link = link
         self.word = word
 
-    def Scrape(self):
-        header = {
-            'User-Agent': 'Mozilla/4.0 (compatible; MSIE 6.1; Windows XP; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'}
-        newsReg = requests.get(
-            self.link, headers=header)
-        return self.text_from_html(newsReg.content, self.word)
+    async def Scrape(self):
+
+        newsReg = await UrlCaller().GetRequestAsync(self.link)
+        return self.text_from_html(newsReg, self.word)
 
     def text_from_html(self, body, q):
         soup = BeautifulSoup(body, 'html.parser')

@@ -1,4 +1,5 @@
 import argparse
+import asyncio
 from src.scraping.SearchForWord import SearchForWord
 from src.scraping.SaveResultToFile import SaveResultToFile
 from src.scraping.ReadItLoad import ReadItLoad
@@ -46,7 +47,7 @@ class CommandLine:
 
         if not readFormFile:
             word = input("Enter your word: ")
-            self.result = SearchForWord(
+            self.result = SearchForWord().Search(
                 self.word, maxParagraph=self.maxParagNumber).paragraphs
 
             for item in self.result:
@@ -54,11 +55,16 @@ class CommandLine:
         else:
             # Read CSV File
             self.wordList = ReadFromCsv(argument.file).readCsv()
-            for word in self.wordList:
-                paragraphs = SearchForWord(
-                    word, maxParagraph=self.maxParagNumber).paragraphs
+            tasks = []
 
-            self.result = paragraphs
+            for word in self.wordList:
+
+                tasks.append(SearchForWord().Search(
+                    word, maxParagraph=self.maxParagNumber))
+
+            loop = asyncio.get_event_loop()
+            paragraphs = loop.run_until_complete(asyncio.gather(*tasks))
+            self.result = paragraphs[0]
 
         if argument.out:
             if self.result:
