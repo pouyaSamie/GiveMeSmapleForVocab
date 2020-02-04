@@ -4,7 +4,7 @@ import argparse
 from src.scraping.SaveResultToFile import SaveResultToFile
 from src.scraping.ReadItLoad import ReadItLoad
 
-from src.SearchForSingleWord import SearchFormFile, Search
+from src.InitSearch import SearchFormFile, Search
 
 
 class CommandLine:
