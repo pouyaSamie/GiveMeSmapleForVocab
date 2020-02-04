@@ -22,8 +22,8 @@ class SearchForWord():
         if len(searchResult) > 0:
             for item in searchResult:
                 result = await SourceScraper(item, word).Scrape()
-                print(result)
                 if result != '':
+                    print(result)
                     foundCount += 1
                     self.paragraphs.append(result)
                     if foundCount == maxParagraph:

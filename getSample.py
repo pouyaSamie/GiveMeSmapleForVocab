@@ -1,9 +1,10 @@
 import argparse
-import asyncio
-from src.scraping.SearchForWord import SearchForWord
+
+
 from src.scraping.SaveResultToFile import SaveResultToFile
 from src.scraping.ReadItLoad import ReadItLoad
-from src.scraping.ReadFromCsv import ReadFromCsv
+
+from src.SearchForSingleWord import SearchFormFile, Search
 
 
 class CommandLine:
@@ -46,25 +47,9 @@ class CommandLine:
             self.maxParagNumber = argument.NumberOfParagraphs
 
         if not readFormFile:
-            word = input("Enter your word: ")
-            self.result = SearchForWord().Search(
-                self.word, maxParagraph=self.maxParagNumber).paragraphs
-
-            for item in self.result:
-                print(item)
+            self.result = Search(self.maxParagNumber)
         else:
-            # Read CSV File
-            self.wordList = ReadFromCsv(argument.file).readCsv()
-            tasks = []
-
-            for word in self.wordList:
-
-                tasks.append(SearchForWord().Search(
-                    word, maxParagraph=self.maxParagNumber))
-
-            loop = asyncio.get_event_loop()
-            paragraphs = loop.run_until_complete(asyncio.gather(*tasks))
-            self.result = paragraphs[0]
+            self.result = SearchFormFile(self.maxParagNumber, argument.file)
 
         if argument.out:
             if self.result:
