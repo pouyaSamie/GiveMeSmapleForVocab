@@ -8,6 +8,7 @@ def Search(word, maxParagNumber):
     loop = asyncio.get_event_loop()
     task = SearchForWord().Search(word, maxParagraph=maxParagNumber).paragraphs
     result = loop.run_until_complete(asyncio.gather(*task))
+
     for item in result:
         print(item)
 
