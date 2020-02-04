@@ -9,6 +9,6 @@
         "request": "launch",
         "program": "D:\\workspace\\pyProjects\\GiveMeVocab\\getSample.py",
         "console": "integratedTerminal",
-        "args": ["-o", "result.txt", "-f", "test.csv", "-n", "2"]
+        "args": ["-o", "result.txt", "-f", "sample.csv", "-n", "2"]
     }]
 }
