@@ -47,9 +47,10 @@ class CommandLine:
             self.maxParagNumber = argument.NumberOfParagraphs
 
         if not readFormFile:
-            self.result = Search(self.maxParagNumber)
+            word = input("Enter your word: ")
+            self.result = Search(word, self.maxParagNumber)
         else:
-            self.result = SearchFormFile(self.maxParagNumber, argument.file)
+            self.result = SearchFormFile(argument.file, self.maxParagNumber)
 
         if argument.out:
             if self.result:
